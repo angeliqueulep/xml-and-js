@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container{
+        background-color: lightgoldenrodyellow;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <form class="form" method="post">
+        <table id="info">
+          <tr>
+            <td>
+              <label for="useremail">Email<span style="color: red"><sup>*</sup></span></label>
+            </td>
+            <td>
+              <input type="email" name="em" id="useremail">
+            </td>
+
+            <td>
+              <span id="useremailresult" style="color: rgb(254, 23, 23);"></span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="datevisit">Date of Visit</label>
+            </td>
+            <td>
+              <input type="date" name="date" id="datevisit">
+            </td>
+
+            <td>
+              <span id="dateresult" style="color: rgb(254, 23, 23);"></span>
+            </td>
+          </tr>
+
+          <tr>
+            <td for="comment" class="label">Your comment</td>
+            <td> <textarea id="comment" rows="10" cols="30"></textarea></td>
+            <td>
+              <span id="commentresult" style="color: rgb(254, 23, 23);"></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: center;"><input type="submit" name="btnsubmit" value="Send your Feedback"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    document.querySelector('form.form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let inputs = document.querySelector('form.form').elements;
+      console.log("Email: ", inputs['useremail'].value);
+      console.log("Date of Visit: ", inputs['datevisit'].value);
+      console.log("Comment: ", inputs['comment'].value);
+    });
+  </script>
+</html>
