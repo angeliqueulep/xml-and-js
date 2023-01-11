@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class>
+  <student>
+    <name>
+      <firstName>Angelique</firstName>
+      <lastName>Ulep</lastName>
+    </name>
+
+    <interests>
+      <interest>Shopping</interest>
+      <interest>Cooking</interest>
+    </interests>
+  </student>
+
+  <student>
+    <name>
+      <firstName>Earle</firstName>
+      <lastName>Bunao</lastName>
+    </name>
+
+    <interests>
+      <interest>Lego</interest>
+      <interest>Gardening</interest>
+    </interests>
+  </student>
+
+  <student>
+    <name>
+      <firstName>Adie</firstName>
+      <lastName>Naag</lastName>
+    </name>
+
+    <interests>
+      <interest>Baking</interest>
+      <interest>Shopping</interest>
+    </interests>
+  </student>
+</class>
