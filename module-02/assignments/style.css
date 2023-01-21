@@ -1,0 +1,30 @@
+originalName {
+  font-size: 18px;
+  font-weight: 500px;
+}
+
+oldName {
+  text-decoration: line-through;
+  color: red;
+}
+
+category {
+  display: block;
+}
+
+title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  display: block;
+}
+
+summary {
+  font-style: italic;
+}
+
+* {
+  text-align: left;
+}
+
