@@ -3,11 +3,7 @@
   <body>
     <table id="pTable">
       <tr>
-        <th>ID</th>
         <th>Name</th>
-        <th>Email</th>
-        <th>Gender</th>
-        <th>IP Address</th>
       </tr>
 
     </table>
@@ -31,13 +27,7 @@
       const createPerson = (info) => {
         const content = `
           <tr>
-            <td>${info.id}</td>
-            <td>
-              ${info.firstName} ${info.lastName}
-            </td>
-            <td>${info.email}</td>
-            <td>${info.gender}</td>
-            <td>${info.ipAddress}</td>
+            <td>${info.fullName}</td>
           </tr>
         `;
 
@@ -45,19 +35,11 @@
       }
 
       const parseInfo = (person) => {
-        const id = person.getElementsByTagName(`id`)[0].childNodes[0].nodeValue;
         const firstName = person.getElementsByTagName(`firstName`)[0].childNodes[0].nodeValue;
         const lastName = person.getElementsByTagName(`lastName`)[0].childNodes[0].nodeValue;
-        const email = person.getElementsByTagName(`email`)[0].childNodes[0].nodeValue;
-        const gender = person.getElementsByTagName(`gender`)[0].childNodes[0].nodeValue;
-        const ipAddress = person.getElementsByTagName(`ipAddress`)[0].childNodes[0].nodeValue;
+        const fullName = firstName + " " + lastName;
         return {
-          id,
-          firstName,
-          lastName,
-          email,
-          gender,
-          ipAddress
+          fullName
         };
       }
 
