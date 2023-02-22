@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <ol id="customers"></ol>
+    <script>
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          displayData(this.responseXML);
+        }
+      };
+      xhttp.open("GET", "customers.xml", true);
+      xhttp.send();
+
+      function stringToNode(html) {
+        const template = document.createElement(`template`);
+        html = html.trim();
+        template.innerHTML = html;
+        return template.content.firstChild;
+      }
+
+      function displayData(xmlDoc) {
+        const listElement = document.getElementById(`customers`);
+
+        const studentNodes = xmlDoc.getElementsByTagName(`customer`);
+        for (let index = 0; index < studentNodes.length; index++) {
+          const studentNode = studentNodes[index];
+          const listItem = stringToNode(`<li>
+            <h2>${
+              studentNode.getElementsByTagName(`name`)[0].childNodes[0]
+                .nodeValue
+            } ${
+            studentNode.getElementsByTagName(`name`)[0].attributes[`title`]
+              .nodeValue
+          }</h2>
+          <p>${studentNode.getElementsByTagName(`address`)[0].childNodes[0]
+              .nodeValue}
+          </p>
+          <p>
+            ${studentNode.getElementsByTagName(`phone`)[0].childNodes[0]
+              .nodeValue}
+          </p>
+          <p>
+            if (studentNode.getElementsByTagName(`email`)[0] != null) {
+              ${studentNode.getElementsByTagName(`email`)[0].childNodes[0]
+              .nodeValue}
+            }
+
+          </p>
+          </li>`);
+          listElement.appendChild(listItem);
+        }
+      }
+    </script>
+  </body>
+</html>

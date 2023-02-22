@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <ol id="list"></ol>
+    <script>
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          displayData(this.responseXML);
+        }
+      };
+      xhr.open("GET", "students.xml", true);
+      xhr.send();
+
+      const displayData = (xmlDoc) => {
+        const students = xmlDoc.getElementsByTagName(`student`);
+
+        const listElement = document.getElementById(`list`);
+
+        for (let index = 0; index < students.length; index++) {
+          const student = students[index];
+
+          const listItem = document.createElement(`li`);
+
+          const firstName = student.getElementsByTagName(`firstname`)[0].childNodes[0].nodeValue;
+          const lastName = student.getElementsByTagName(`lastname`)[0].childNodes[0].nodeValue;
+          // debugger;
+          const fullName = firstName + " " + lastName;
+          const title = document.createElement(`h2`);
+
+          title.appendChild(document.createTextNode(fullName));
+          listItem.appendChild(title);
+
+          const subTitle = document.createElement(`p`);
+          const subTitleValue = "rollno - " + student.attributes.rollno.value;
+          subTitle.appendChild(document.createTextNode(subTitleValue));
+          listItem.appendChild(subTitle);
+
+          const grade = document.createElement(`p`);
+          const gradeValue = "Grade: " + student.getElementsByTagName("marks")[0].textContent;
+          grade.appendChild(document.createTextNode(gradeValue));
+          listItem.appendChild(grade);
+
+          const nickname = document.createElement(`p`);
+          const nicknameValue = "Nickname: " + student.getElementsByTagName("nickname")[0].textContent;
+          nickname.appendChild(document.createTextNode(nicknameValue));
+          listItem.appendChild(nickname);
+
+
+          listElement.appendChild(listItem);
+        }
+      }
+
+    </script>
+  </body>
+</html>
