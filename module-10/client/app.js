@@ -42,10 +42,17 @@ const getPlaylistsByGenre = async (token, genreId, limit = 10) => {
 }
 
 const showPlaylists = (id) => {
+  // closes previously selected genres
+  const horizontalDisplays = document.querySelectorAll(".horizontal-display");
+  horizontalDisplays.forEach((element) => {
+    element.classList.remove("horizontal-display");
+    element.parentNode.classList.remove("selected");
+  });
   const article = document.getElementById(id);
-  const playlistCard = article.querySelector(".playlist-card");
+  const playlistCard = article.querySelector('.playlist-card-container');
 
-  playlistCard.classList.toggle("horizontal-display");
+  article.classList.add("selected");
+  playlistCard.classList.toggle('horizontal-display');
 };
 
 const load = async () => {
@@ -67,14 +74,16 @@ const load = async () => {
 
     const html = `<article class="genre" id="${id}" onclick="showPlaylists('${id}')">
     <div class="genre-card" style="background-image: url(${icon.url})">
-      <div class="genre-title">
+      <div>
         <h2>${name}</h2>
       </div>
     </div>
 
-    <ol class="playlist-card">
+    <div class="playlist-card-container">
+      <ol class="playlist-card">
       ${playlists}
-    </ol>
+      </ol>
+    </div>
 
     </article>`;
 

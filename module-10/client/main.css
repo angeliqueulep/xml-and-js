@@ -1,3 +1,15 @@
+* {
+  color: #4daf64;
+}
+
+body {
+  background-color: #121212;
+}
+
+h1 {
+  text-align: center;
+}
+
 #genres {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -18,10 +30,6 @@
   margin-bottom: 15px;
 }
 
-.genre-title {
-  color: #BB86FC;
-}
-
 .genre-card > div {
   display: flex;
   flex-direction: column;
@@ -34,14 +42,35 @@ ol {
   margin: 0;
   padding: 0;
   max-width: 100%;
-  overflow: auto;
+  overflow-x: scroll;
 }
 
 .playlist-card {
   display: none;
   overflow: auto;
+  width: 100%;
 }
 
 .horizontal-display {
   display: flex;
+}
+
+.playlist-card-container.horizontal-display {
+  height: 200px;
+}
+
+.horizontal-display .playlist-card {
+  display: flex;
+  position: absolute;
+  left: 30px;
+  width: calc(100vw - 70px);
+  min-width: calc(100vw - 70px);
+}
+
+.selected .genre-card {
+  background-color: #f5f5f5;
+  border: 2px solid #1db954;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
