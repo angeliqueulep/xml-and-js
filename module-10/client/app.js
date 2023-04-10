@@ -41,6 +41,18 @@ const getPlaylistsByGenre = async (token, genreId, limit = 10) => {
   return data.playlists.items;
 }
 
+const getPlaylistTracks = async (token, href) => {
+  const limit = 5;
+
+  const result = await fetch(href + `?limit=${limit}`, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + token },
+  });
+
+  const data = await result.json();
+  return data.items;
+}
+
 const showPlaylists = (id) => {
   // closes previously selected genres
   const horizontalDisplays = document.querySelectorAll(".horizontal-display");
@@ -62,15 +74,28 @@ const load = async () => {
   const list = document.getElementById(`genres`);
 
   genres.map(async ({name, id, icons: [icon] }) => {
-    const playlists = await getPlaylistsByGenre(token, id).then(data =>
-      data.map(({ name, images: [image], external_urls: { spotify } }) => `<li>
-        <a href="${spotify}" target="_blank">
-          <img src="${image.url}" width="180" height="180" alt="${name}"/>
-        </a>
-      </li>`
-      ).join(``)
-    );
+    const playlists = await getPlaylistsByGenre(token, id);
 
+    const playlistsList = await Promise.all(
+      playlists.map(async ({name, images: [image], external_urls: { spotify }, tracks: {href: tracksUrl}}) => {
+      const tracks = await getPlaylistTracks(token, tracksUrl);
+
+      const tracksList = tracks.map(({track: {name, artists: [{name: artistName}]}}) => {
+        return `<li>${name} - ${artistName}</li>`;
+      }).join(``);
+
+      return `<li>
+        <div>
+          <a href="${spotify}" target="_blank">
+            <img src="${image.url}" width="180" height="180" alt="${name}"/>
+          </a>
+          <h3>Tracks</h3>
+          <ol>
+            ${tracksList}
+          </ol>
+        </div>
+      </li>`;
+    }));
 
     const html = `<article class="genre" id="${id}" onclick="showPlaylists('${id}')">
     <div class="genre-card" style="background-image: url(${icon.url})">
@@ -81,7 +106,7 @@ const load = async () => {
 
     <div class="playlist-card-container">
       <ol class="playlist-card">
-      ${playlists}
+      ${playlistsList}
       </ol>
     </div>
 
