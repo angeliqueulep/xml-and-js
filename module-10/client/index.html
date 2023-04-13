@@ -4,6 +4,16 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
+    <form onsubmit="onSubmit(event)">
+      <label for="input-genre">Find genre</label>
+      <input
+        type="text"
+        name="genre"
+        id="input-genre"
+        placeholder="Enter value"
+      />
+      <button type="submit">Apply filters</button>
+    </form>
     <h1>Spotify Genres</h1>
     <div id="genres"></div>
     <script type="text/javascript" src="app.js"></script>
